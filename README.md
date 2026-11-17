@@ -10,6 +10,7 @@ Static website for Tenkara Consulting, LLC (tenkaraconsulting.org). Plain HTML, 
 | --- | --- |
 | `index.html` | Home page (hero, services, leadership, about, contact summary) |
 | `contact/index.html` | Contact form and map |
+| `publications/index.html` | Selected publications (names of the two principals in bold) |
 | `contact/thank-you/index.html` | Page shown after a message is sent |
 | `404.html` | "Page not found" page |
 | `static/css/styles.css` | All styling and brand colors (identical to the previous site) |
