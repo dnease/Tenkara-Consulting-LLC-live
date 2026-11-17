@@ -1,0 +1,10 @@
+# Never commit secrets or local files to this public repository.
+.env
+.env.*
+*.key
+*.pem
+*.p12
+secrets*
+.DS_Store
+Thumbs.db
+node_modules/

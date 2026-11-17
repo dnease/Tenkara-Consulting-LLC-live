@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tenkara Consulting</title>
+    <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="../" class="logo">
+                <span class="logo-word">TENKARA</span>
+                <span class="logo-sub">
+                    <span>CONSULTING</span>
+                    <span class="logo-rule"></span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../#home">Home</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#expertise">Leadership</a></li>
+                <li><a href="../#about">About</a></li>
+                <li><a href="./">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+
+<div class="contact-page">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>Get in Touch</h1>
+            <p>Have a question about our services or want to discuss a potential project? We'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-content">
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h2>Send Us a Message</h2>
+
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+
+                <!--
+                    FORM SERVICE: the action below is a placeholder. It must be replaced with the
+                    endpoint from the chosen form service before this site goes live (see README.md).
+                    Only a PUBLIC form ID / endpoint belongs here. Never put a secret API key in this file.
+                -->
+                <form id="contact-form" method="POST" action="https://REPLACE-WITH-FORM-SERVICE-ENDPOINT">
+                    <!-- Spam trap: hidden from people, filled in by bots. Do not remove. -->
+                    <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+                        <input type="text" name="fax_number" tabindex="-1" autocomplete="off" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required minlength="1" maxlength="100" placeholder="Your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organization">Organization</label>
+                        <input type="text" id="organization" name="organization" minlength="1" maxlength="200" placeholder="Your organization (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required maxlength="254" placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason">Reason for Inquiry <span class="required">*</span></label>
+                        <select id="reason" name="reason" required>
+                            <option value="">Select a reason...</option>
+                            <option value="practice-based-research">Practice-Based Research Networks</option>
+                            <option value="community-engagement">Community Engaged Research</option>
+                            <option value="capacity-building">Research Capacity Building</option>
+                            <option value="grant-writing">Grant Writing &amp; Funding</option>
+                            <option value="evaluation">Evaluation &amp; Implementation Science</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" required minlength="10" maxlength="5000" placeholder="Tell us about your project or inquiry..."></textarea>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: var(--tk-mute); margin-bottom: 1.25rem;">Please do not include patient or other sensitive health information in this form.</p>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section">
+                <h2>Our Location</h2>
+                <div id="map"></div>
+                <div class="location-info">
+                    <h3>Denver, Colorado</h3>
+                    <p>We are based in Denver, Colorado, serving primary care organizations and academic health sciences institutions nationwide.</p>
+                    <p style="margin-top: 15px;"><strong>Email:</strong> don@tenkaraconsulting.org</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tenkara Consulting, LLC &mdash; Advancing primary care through research excellence.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../static/js/main.js"></script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    // Map: set up in its own guarded block so the contact form below keeps working
+    // even if the map library fails to load.
+    try {
+        const map = L.map('map').setView([39.7392, -104.9903], 11);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        const marker = L.marker([39.7392, -104.9903]).addTo(map);
+        marker.bindPopup('<b>Tenkara Consulting</b><br>Denver, Colorado').openPopup();
+    } catch (mapError) {
+        console.warn('Map could not be loaded.', mapError);
+    }
+
+    const form = document.getElementById('contact-form');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
+
+    function showError(text, submitButton) {
+        errorMessage.textContent = text;
+        errorMessage.style.display = 'block';
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Message';
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+
+        // Spam trap: a person never sees this field, so any value means a bot.
+        // Show the normal thank-you page and send nothing, so the bot learns nothing.
+        const trap = form.querySelector('input[name="fax_number"]');
+        if (trap && trap.value) {
+            window.location.href = 'thank-you/';
+            return;
+        }
+
+        // Safety net: do not pretend to send until a real form service is connected.
+        const endpoint = form.getAttribute('action');
+        if (!endpoint || endpoint.indexOf('REPLACE-WITH') !== -1) {
+            showError('This form is not connected yet. Please email info@tenkaraconsulting.org instead.');
+            return;
+        }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                window.location.href = 'thank-you/';
+            } else {
+                let detail = '';
+                try {
+                    const data = await response.json();
+                    detail = data.detail || data.error || data.message || '';
+                } catch (parseError) {
+                    detail = '';
+                }
+                showError(detail || 'Failed to send message. Please try again.', submitButton);
+            }
+        } catch (error) {
+            showError('An error occurred. Please try again later.', submitButton);
+        }
+    });
+</script>
+
+</body>
+</html>
