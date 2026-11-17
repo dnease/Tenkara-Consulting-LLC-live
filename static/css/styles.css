@@ -288,6 +288,28 @@ section {
     box-shadow: var(--tk-shadow-md);
 }
 
+.leadership-photo {
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+}
+
+.leadership-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--tk-rule);
+    box-shadow: 0 6px 20px rgba(0,48,48,0.12);
+}
+
+.leadership-photo figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--tk-mute);
+    letter-spacing: 0.02em;
+}
+
 .expert-avatar {
     width: 72px;
     height: 72px;
