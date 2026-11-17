@@ -67,25 +67,11 @@ nav {
 /* Branded lockup: TENKARA / CONSULTING */
 .logo {
     display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
     color: var(--tk-paper);
     text-decoration: none;
     line-height: 1;
-}
-
-.logo-mark {
-    width: 44px;
-    height: 44px;
-    flex: none;
-    display: block;
-}
-
-.logo-text {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
 .logo-word {
@@ -110,6 +96,13 @@ nav {
     font-size: 0.62rem;
     letter-spacing: 0.36em;
     white-space: nowrap;
+}
+
+.logo-fly {
+    height: 20px;
+    width: auto;
+    flex: none;
+    display: block;
 }
 
 .logo-rule {
