@@ -52,14 +52,18 @@
                 <div id="success-message" class="success-message"></div>
 
                 <!--
-                    FORM SERVICE: the action below is a placeholder. It must be replaced with the
-                    endpoint from the chosen form service before this site goes live (see README.md).
-                    Only a PUBLIC form ID / endpoint belongs here. Never put a secret API key in this file.
+                    FORM SERVICE: Web3Forms. The access_key below is a PUBLIC key (it only routes
+                    messages to our inbox and cannot log in to the account). Replace the placeholder
+                    with the real key before go-live (see README.md). Never put a secret key here.
                 -->
-                <form id="contact-form" method="POST" action="https://REPLACE-WITH-FORM-SERVICE-ENDPOINT">
-                    <!-- Spam trap: hidden from people, filled in by bots. Do not remove. -->
+                <form id="contact-form" method="POST" action="https://api.web3forms.com/submit">
+                    <input type="hidden" name="access_key" value="REPLACE-WITH-WEB3FORMS-ACCESS-KEY">
+                    <input type="hidden" name="subject" value="New inquiry from tenkaraconsulting.org">
+                    <input type="hidden" name="from_name" value="Tenkara Consulting website">
+                    <!-- Spam traps: hidden from people, filled in by bots. Do not remove. -->
                     <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
                         <input type="text" name="fax_number" tabindex="-1" autocomplete="off" value="">
+                        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -96,6 +100,8 @@
                         <textarea id="message" name="message" required minlength="10" maxlength="5000" placeholder="Tell us about your project or inquiry..."></textarea>
                     </div>
 
+                    <div class="h-captcha" data-captcha="true" style="margin-bottom: 1.25rem;"></div>
+
                     <p style="font-size: 0.9rem; color: var(--tk-mute); margin-bottom: 1.25rem;">Please do not include patient or other sensitive health information in this form.</p>
 
                     <button type="submit" class="submit-button">Send Message</button>
@@ -126,6 +132,8 @@
 
     <!-- Scripts -->
     <script src="../static/js/main.js"></script>
+    <!-- Web3Forms hCaptcha loader (third-party script served by the form service; cannot be SRI-pinned) -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
@@ -167,15 +175,24 @@
         // Spam trap: a person never sees this field, so any value means a bot.
         // Show the normal thank-you page and send nothing, so the bot learns nothing.
         const trap = form.querySelector('input[name="fax_number"]');
-        if (trap && trap.value) {
+        const trapBox = form.querySelector('input[name="botcheck"]');
+        if ((trap && trap.value) || (trapBox && trapBox.checked)) {
             window.location.href = 'thank-you/';
             return;
         }
 
-        // Safety net: do not pretend to send until a real form service is connected.
+        // Safety net: do not pretend to send until the real access key is in place.
         const endpoint = form.getAttribute('action');
-        if (!endpoint || endpoint.indexOf('REPLACE-WITH') !== -1) {
+        const accessKey = form.querySelector('input[name="access_key"]');
+        if (!endpoint || !accessKey || accessKey.value.indexOf('REPLACE-WITH') !== -1) {
             showError('This form is not connected yet. Please email info@tenkaraconsulting.org instead.');
+            return;
+        }
+
+        // The captcha must be completed (the hCaptcha script adds this field).
+        const captcha = form.querySelector('textarea[name="h-captcha-response"]');
+        if (captcha && !captcha.value) {
+            showError('Please complete the captcha before sending.');
             return;
         }
 

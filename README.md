@@ -21,9 +21,9 @@ Links between pages are relative, so the site works at a temporary address and o
 
 ## Before this site goes live (checklist)
 
-- [ ] **Connect the contact form.** In `contact/index.html`, replace `https://REPLACE-WITH-FORM-SERVICE-ENDPOINT` in the form's `action` with the endpoint from the chosen form service. Only a public form ID or endpoint belongs there. If a service asks for a secret key in the page, it is the wrong service.
-- [ ] Match the spam-trap field to the service. The hidden field is named `fax_number`. If the service has its own honeypot field name, set it up in the service (or rename the field here and in the script at the bottom of `contact/index.html`).
-- [ ] In the form service, restrict submissions to the site's own domain and turn on its spam filtering or Turnstile/CAPTCHA option.
+- [ ] **Connect the contact form (Web3Forms).** Create an access key at web3forms.com for the address that should receive messages, then replace `REPLACE-WITH-WEB3FORMS-ACCESS-KEY` in `contact/index.html`. The access key is public by design (it only routes messages to the inbox). Never put any secret key in this repo.
+- [x] Spam traps are in place: hidden `fax_number` field and Web3Forms' `botcheck` checkbox (both silently discard the message), plus an hCaptcha widget loaded from the Web3Forms script.
+- [ ] In the Web3Forms dashboard, make hCaptcha the preferred captcha / block-spam option, and check whether the free plan can limit submissions to the site's own domain. Send test messages after enabling.
 - [ ] Send a real test message and confirm it arrives at the right inbox, and that the thank-you page appears.
 - [ ] Review the content flagged below.
 
