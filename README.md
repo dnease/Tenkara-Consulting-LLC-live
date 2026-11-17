@@ -21,7 +21,7 @@ Links between pages are relative, so the site works at a temporary address and o
 
 ## Before this site goes live (checklist)
 
-- [ ] **Connect the contact form (Web3Forms).** Create an access key at web3forms.com for the address that should receive messages, then replace `REPLACE-WITH-WEB3FORMS-ACCESS-KEY` in `contact/index.html`. The access key is public by design (it only routes messages to the inbox). Never put any secret key in this repo.
+- [x] **Connect the contact form (Web3Forms).** Create an access key at web3forms.com for the address that should receive messages, the key is now set in `contact/index.html`. The access key is public by design (it only routes messages to the inbox). Never put any secret key in this repo.
 - [x] Spam traps are in place: hidden `fax_number` field and Web3Forms' `botcheck` checkbox (both silently discard the message), plus an hCaptcha widget loaded from the Web3Forms script.
 - [ ] In the Web3Forms dashboard, make hCaptcha the preferred captcha / block-spam option, and check whether the free plan can limit submissions to the site's own domain. Send test messages after enabling.
 - [ ] Send a real test message and confirm it arrives at the right inbox, and that the thank-you page appears.
