@@ -67,11 +67,18 @@ nav {
 /* Branded lockup: TENKARA / CONSULTING */
 .logo {
     display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
     color: var(--tk-paper);
     text-decoration: none;
     line-height: 1;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .logo-word {
@@ -99,7 +106,7 @@ nav {
 }
 
 .logo-fly {
-    height: 20px;
+    height: 28px;
     width: auto;
     flex: none;
     display: block;
